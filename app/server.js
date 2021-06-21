@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'PCe90buqG123byd24dunLz3k9L',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/', require('./routes/index'));
 app.use('/groups', require('./routes/groups'));
-app.use('/users', require('./routes/users'));
+app.use('/', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

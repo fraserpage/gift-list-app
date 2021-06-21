@@ -1,9 +1,14 @@
 const Group = require('../models/group')
+const GiftList = require('../models/giftList')
 
 module.exports = { index, show, new: newGroup, create, update }
 
 function index(req,res){
-  res.send('group index. is this needed? should just be a dropdown?')
+  res.render('groups/index',{
+    title:'groups', 
+    user: req.user,
+    groups: Group.find({})
+  })
 }
 
 function show(req,res){

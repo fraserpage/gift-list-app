@@ -1,4 +1,5 @@
 const Group = require('../models/group')
+const GiftList = require('../models/giftList')
 
 module.exports = { create, update }
 
