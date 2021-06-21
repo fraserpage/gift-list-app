@@ -1,3 +1,14 @@
-<%- include('../partials/header.ejs') %> 
-hi
-<%- include('../partials/footer.ejs') %> 
+<%- include('../partials/header') %> 
+
+<%- include('partials/new') %> 
+
+<% console.log(groups)
+if (groups.length){
+  for (let group of groups) { %> 
+    <a href="/groups/<%= group._id %>">
+      <h2><%= group.name %></h2>  
+      <p><%= group.desc %></p>
+    </a>
+<% }
+}%>
+<%- include('../partials/footer') %> 

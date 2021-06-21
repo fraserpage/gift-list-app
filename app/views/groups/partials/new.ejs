@@ -1,0 +1,32 @@
+<form action="/groups/" method="post">
+
+  <label for="name">Group name</label>
+  <input type="text" name="name" id="name">
+
+  <label for="desc">Description</label>
+  <textarea name="desc" id="desc" cols="30" rows="2"></textarea>
+
+  <label for="invites">Invite people</label>
+  <textarea name="invites" id="invites" cols="30" rows="5"></textarea>
+
+  <button type="submit">Lets go</button>
+</form>
+
+<script>
+  // Validate email list
+  let emailList = document.getElementById('invites')
+  emailList.addEventListener('change',validateEmails)
+  function validateEmails(e){
+    let emails = e.target.value.replace(/\s/g,'').split(",");
+    let valid = true;
+    let regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    for (let i = 0; i < emails.length; i++) {
+      if( emails[i] == "" || ! regex.test(emails[i])){
+        valid = false
+        break
+      }
+    }
+    console.log('valid',valid)
+  }
+</script>

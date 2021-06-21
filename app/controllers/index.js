@@ -1,8 +1,14 @@
 function index(req, res, next) {
-  res.render('index', {
-    title: 'home',
-    user: req.user,
-  });
+  if (req.user){
+    res.redirect('/groups')
+  }
+  else{
+    res.render('index', {
+      title: 'home',
+      user: req.user,
+    });
+  }
+  
 }
 
 module.exports = {index}
