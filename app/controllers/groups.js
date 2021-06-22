@@ -4,7 +4,6 @@ const GiftList = require('../models/giftList')
 module.exports = { index, show, new: newGroup, create, update }
 
 async function index(req,res){
-  if (req.user){
     // find groups that the user is a member of
     const groups = await Group.find({ users: req.user._id })
     res.render('groups/index',{
@@ -12,14 +11,15 @@ async function index(req,res){
       user: req.user,
       groups,
     })
-  }
-  else{
-    res.redirect('/')
-  }
 }
 
-function show(req,res){
-  res.send('group show page')
+async function show(req,res){
+  const group = await Group.findById(req.params.id)
+  res.render('groups/show',{
+    title:'group', 
+    user: req.user,
+    group,
+  })
 }
 
 function newGroup(){
@@ -31,8 +31,8 @@ async function create(req,res){
   req.body.owner = req.user._id
   req.body.users = [req.user._id]
   try {
-    let list =  await Group.create(req.body)
-    res.redirect('/groups')
+    const group = await Group.create(req.body)
+    res.redirect('/groups/'+group._id)
 
   } catch (error) {
     console.log(error)
