@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
 
 var app = express();
 
@@ -31,7 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/', require('./routes/index'));
-app.use('/groups', require('./routes/groups'));
+app.use('/', require('./routes/login'));
+app.use('/groups', ensureLoggedIn('/login'), require('./routes/groups'));
 app.use('/', require('./routes/users'));
 
 // catch 404 and forward to error handler
