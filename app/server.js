@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser')
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/login'));
 app.use('/groups', ensureLoggedIn('/login'), require('./routes/groups'));
+app.use('/', ensureLoggedIn('/login'), require('./routes/giftLists'));
 app.use('/', require('./routes/users'));
 
 // catch 404 and forward to error handler
