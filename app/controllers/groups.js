@@ -1,5 +1,4 @@
 const Group = require('../models/group')
-const GiftList = require('../models/giftList')
 
 module.exports = { index, show, new: newGroup, create, update }
 
@@ -14,7 +13,7 @@ async function index(req,res){
 }
 
 async function show(req,res){
-  const group = await Group.findById(req.params.id)
+  const group = await Group.findById(req.params.id).populate('giftLists.user').exec()
   res.render('groups/show',{
     title:'group', 
     user: req.user,
