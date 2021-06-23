@@ -1,0 +1,23 @@
+<% for (let list of lists){ %> 
+  <% if (list.user._id.equals(user._id)){ %> 
+    this should be the update list form
+    <h3>Your list</h3>
+    <p><%= list.desc %> </p>
+    <% for (let gift of list.gifts){ %> 
+      <p><%= gift.name %> </p>
+      <p><%= gift.note %> </p>
+      <p><%= gift.link %> </p>
+    <% } %> 
+
+  <% }
+  else{ %> 
+    <h3><%= list.user.firstName+"'s list" %> </h3>
+  <p><%= list.desc %> </p>
+  <% for (let gift of list.gifts){ %> 
+    <p><%= gift.name %> </p>
+    <p><%= gift.note %> </p>
+    <p><%= gift.link %> </p>
+  <% } %> 
+  <% } %> 
+
+<% } %> 

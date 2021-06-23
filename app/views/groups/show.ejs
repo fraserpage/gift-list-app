@@ -1,6 +1,14 @@
-<%- include('../partials/header.ejs') %> 
+<%- include('../partials/header') %> 
 
 <h1><%= group.name %> </h1>
 <p><%= group.desc %> </p>
 
-<%- include('../partials/footer.ejs') %> 
+<% console.log("group.giftLists[0].user._id",group.giftLists[0].user._id === user._id, "user._id",) %> 
+
+<%# Only show the new gift list form if the user doesn't have one already %> 
+<% if ( ! group.giftLists.some( list => list.user._id.equals(user._id) )){ %> 
+  <%- include('../gift-lists/new') %> 
+<% } %> 
+<%- include('../gift-lists/show', {lists: group.giftLists, user}) %> 
+
+<%- include('../partials/footer') %> 
