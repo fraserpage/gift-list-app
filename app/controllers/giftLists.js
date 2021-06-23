@@ -1,10 +1,19 @@
 const Group = require('../models/group')
-const GiftList = require('../models/giftList')
 
 module.exports = { create, update }
 
-function create(req,res){
-  res.send('create a new gift list for a user if they do not have one')
+async function create(req,res){
+  req.body.user = req.user._id
+  console.log(req.body)
+  try{
+    let group = await Group.findById(req.params.id)
+    group.giftLists.push(req.body)
+    await group.save()
+    res.redirect('/groups/'+req.params.id)
+  }
+  catch(err){
+    console.log(err)
+  }
 }
 
 function update(req,res){
