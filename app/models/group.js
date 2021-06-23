@@ -1,6 +1,27 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+const giftSchema = new Schema({
+  name: String,
+  note: String,
+  link: String,
+}, 
+{
+  timestamps: true
+})
+
+const giftListSchema = new Schema({
+  desc: String,
+  user: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User'
+  },
+  gifts: [giftSchema]
+}, 
+{
+  timestamps: true
+})
+
 const groupSchema = new Schema({
   name: String,
   desc: String,
@@ -13,10 +34,7 @@ const groupSchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'User'
   }],
-  giftLists: [{
-    type: Schema.Types.ObjectId, 
-    ref: 'GiftList'
-  }],
+  giftLists: [giftListSchema],
 }, 
 {
   timestamps: true

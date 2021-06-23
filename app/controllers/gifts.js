@@ -1,8 +1,6 @@
 const Group = require('../models/group')
-const GiftList = require('../models/giftList')
 
 module.exports = { create, update, delete: deleteGift }
-
 
 function create(){
   res.send('create gift')
