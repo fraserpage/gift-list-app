@@ -22,6 +22,10 @@ const giftListSchema = new Schema({
   timestamps: true
 })
 
+const inviteSchema = new Schema({
+  email: String
+})
+
 const groupSchema = new Schema({
   name: String,
   desc: String,
@@ -29,7 +33,7 @@ const groupSchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'User'
   },
-  invites: [String],
+  invites: [inviteSchema],
   users: [{
     type: Schema.Types.ObjectId, 
     ref: 'User'
