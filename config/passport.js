@@ -9,26 +9,28 @@ passport.use(new GoogleStrategy({
 },
 function(accessToken, refreshToken, profile, cb) {
   // a user has logged in with OAuth...
-  User.findOne({ 'googleId': profile.id }, function(err, user) {
-    if (err) return cb(err);
-    if (user) {
-      return cb(null, user);
-    } else {
-      // we have a new user via OAuth!
-      var newUser = new User({
-        name: profile.displayName,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        email: profile.emails[0].value,
-        avatar: profile.photos[0].value,
-        googleId: profile.id
-      });
-      newUser.save(function(err) {
-        if (err) return cb(err);
-        return cb(null, newUser);
-      });
+  User.findOne({ 'googleId': profile.id }, 
+    function(err, user) {
+      if (err) return cb(err);
+      if (user) {
+        return cb(null, user);
+      } else {
+        // we have a new user via OAuth!
+        var newUser = new User({
+          name: profile.displayName,
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          email: profile.emails[0].value,
+          avatar: profile.photos[0].value,
+          googleId: profile.id
+        });
+        newUser.save(function(err) {
+          if (err) return cb(err);
+          return cb(null, newUser);
+        });
+      }
     }
-  });
+  );
 
 }));
 
