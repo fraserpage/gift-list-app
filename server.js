@@ -1,13 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser')
-var logger = require('morgan');
-var session = require('express-session');
-var passport = require('passport');
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser')
+const logger = require('morgan');
+const methodOverride = require('method-override')
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const passport = require('passport');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
 
-var app = express();
+const app = express();
 
 require('dotenv').config();
 require('./config/database');
@@ -24,18 +26,20 @@ app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
 
 // routes
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/login'));
+app.use('/', require('./routes/invites'));
 app.use('/groups', ensureLoggedIn('/login'), require('./routes/groups'));
 app.use('/', ensureLoggedIn('/login'), require('./routes/giftLists'));
-app.use('/', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
