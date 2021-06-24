@@ -1,10 +1,5 @@
-var router = require('express').Router();
+const router = require('express').Router();
 const passport = require('passport');
-
-// The root route renders our only view
-router.get('/users', function(req, res) {
-  res.send('users listing');
-});
 
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
