@@ -1,6 +1,6 @@
 var router = require('express').Router();
 const passport = require('passport');
-const Group = require('../models/group')
+const invitesCtrl = require('../controllers/invites')
 
 // The root route renders our only view
 router.get('/login', function(req, res) {
@@ -24,29 +24,7 @@ router.get('/oauth2callback', passport.authenticate(
     // successReturnToOrRedirect : '/',
     failureRedirect : '/'
   }
-),async function(req, res) {
-  // Successful authentication, redirect home.
-
-  console.log('session',req.session.invite)
-  // if this was login in response to invite
-  if (req.session.invite){
-    const group = await Group.findById(req.session.invite.group)
-    const invite = group.invites.id(req.session.invite.invite)
-    delete req.session.invite
-    if (invite){
-      console.log('group before',group)
-      group.users.push(req.user._id)
-      invite.remove()
-      await group.save()
-      console.log('group after',group)
-    }
-    // do we want to send a flash message here?
-    res.redirect('/groups/'+req.params.id)
-  }
-  else{
-    res.redirect('/');
-  }
-});
+),invitesCtrl.processInvite);
 
 // OAuth logout route
 router.get('/logout', function(req, res){

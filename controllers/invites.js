@@ -1,7 +1,8 @@
 const Group = require('../models/group')
 
 module.exports = {
-  show
+  show,
+  processInvite
 };
 
 async function show(req, res){
@@ -42,5 +43,30 @@ async function show(req, res){
       // send them to the group - they'll have to login first
       res.redirect('/groups/'+req.params.id)
     }
+  }
+}
+
+// Called on successful authentication
+async function processInvite(req, res) {
+  // does session invite exist? 
+  if (req.session.invite){
+    console.log('session exists',req.session.invite)
+    const group = await Group.findById(req.session.invite.group)
+    const invite = group.invites.id(req.session.invite.invite)
+    delete req.session.invite
+    // is the invite still valid?
+    if (invite){
+      console.log('invite exists',invite)
+      // add the user to the group and remove the invite
+      group.users.push(req.user._id)
+      invite.remove()
+      await group.save()
+      console.log('group after invite removed',group)
+    }
+    // do we want to send a flash message here?
+    res.redirect('/groups/'+req.params.id)
+  }
+  else{
+    res.redirect('/');
   }
 }
