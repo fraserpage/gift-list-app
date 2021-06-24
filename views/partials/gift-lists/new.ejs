@@ -7,22 +7,22 @@
 
   <h4>Add something to it</h4>
   <div id="gifts-form">
-    <label for="gift1name">Gift</label>
-    <input type="text" name="gifts[1][name]" id="gift1name">
-    <label for="gift1note">Note</label>
-    <input type="text" name="gifts[1][note]" id="gift1note">
-    <label for="gift1link">Link</label>
-    <input type="text" name="gifts[1][link]" id="gift1link">  
+    <label for="gift0name">Gift</label>
+    <input type="text" name="gifts[0][name]" id="gift0name">
+    <label for="gift0note">Note</label>
+    <input type="text" name="gifts[0][note]" id="gift0note">
+    <label for="gift0link">Link</label>
+    <input type="text" name="gifts[0][link]" id="gift0link">  
   </div>
   
-  <span id="add-gift">Add another item</span>
+  <span class="button" id="add-gift">Add another item</span>
 
   <button type="submit">Lets go</button>
 </form>
 
 <script>
   let giftsForm = document.getElementById('gifts-form')
-  let numGifts = 1
+  let numGifts = 0
   document.getElementById('add-gift').addEventListener('click',function(){
     numGifts++
     let newGiftElem = document.createElement('div')

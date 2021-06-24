@@ -1,0 +1,13 @@
+<nav>
+  <% if (user) { %>
+    <a href="/groups">Groups</a>
+  
+    <div class="account">
+      <a href="/logout">Log Out</a>
+      <img src="<%= user.avatar %> " alt="">
+    </div>
+    
+  <% } else { %>
+    <a href="/auth/google">Login with Google</a>
+  <% } %>
+</nav>

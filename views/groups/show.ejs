@@ -1,14 +1,21 @@
 <%- include('../partials/header') %> 
-
+<small>Group:</small>
 <h1><%= group.name %> </h1>
 <p><%= group.desc %> </p>
-
-<% console.log("group.giftLists[0].user._id",group.giftLists[0].user._id === user._id, "user._id",) %> 
+<small>Group admin: <%= group.owner.name %> </small>
+<% if (group.owner._id.equals(user._id)){ %>
+  <a href="/group/<%= group._id %>/update">Edit group</a>
+<% } %> 
+<% if (group.owner._id.equals(user._id) && group.invites.length){ %>
+  <p>Outstanding invites:
+    <%- group.invites.map(e => `<a href="mailto:${e.email}">${e.email}</a>`).join(", ") %> 
+  </p>
+<% } %>
 
 <%# Only show the new gift list form if the user doesn't have one already %> 
 <% if ( ! group.giftLists.some( list => list.user._id.equals(user._id) )){ %> 
-  <%- include('../gift-lists/new') %> 
+  <%- include('../partials/gift-lists/new') %> 
 <% } %> 
-<%- include('../gift-lists/show', {lists: group.giftLists, user}) %> 
+<%- include('../partials/gift-lists/show', {lists: group.giftLists, user}) %> 
 
 <%- include('../partials/footer') %> 

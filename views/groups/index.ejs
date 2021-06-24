@@ -1,14 +1,20 @@
 <%- include('../partials/header') %> 
 
-<%- include('partials/new') %> 
-
-<% console.log(groups)
-if (groups.length){
-  for (let group of groups) { %> 
+<% if (groups.length){ %>
+  <h2>Your groups</h2>
+  <% for (let group of groups) { %> 
     <a href="/groups/<%= group._id %>">
       <h2><%= group.name %></h2>  
       <p><%= group.desc %></p>
     </a>
 <% }
-}%>
+}
+else{ %>
+  <h2>Looks like you're new here!</h2>
+<% } %>
+
+
+<h2>Create a group</h2>
+<%- include('../partials/groups/new') %> 
+
 <%- include('../partials/footer') %> 
