@@ -29,16 +29,15 @@ function newGroup(){
 async function create(req,res){
   req.body.owner = req.user._id
   req.body.users = [req.user._id]
+  // filter out empty form fields
+  req.body.invites = req.body.invites.filter(e=>e.email)
   try {
     const group = await Group.create(req.body)
     // send email invites
     for (let invite of group.invites){
       sendMail.invite(group, invite, req.user, req.body)
-      
     }
-
     res.redirect('/groups/'+group._id)
-
   } catch (error) {
     console.log(error)
     res.redirect('/groups')
