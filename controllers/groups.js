@@ -5,6 +5,7 @@ module.exports = {
   index, 
   show, 
   new: newGroup, 
+  delete: deleteOne,
   edit,
   invite,
   create, update 
@@ -58,6 +59,11 @@ async function create(req,res){
     console.log(error)
     res.redirect('/groups')
   }
+}
+
+async function deleteOne(req,res){
+  await Group.findByIdAndDelete(req.params.id)
+  res.redirect('/groups')
 }
 
 async function edit(req,res){

@@ -1,0 +1,8 @@
+
+  <form action="/groups/<%= group._id %>?_method=DELETE" method="post">
+
+    <label for="desc">Type "<%= group.name %>" to delete</label>
+    <input name="desc" id="desc" type="text" oninput="this.value==='<%= group.name %>' ? this.nextElementSibling.disabled = false: this.nextElementSibling.disabled = true">
+
+    <button disabled type="submit">DELETE GROUP</button>
+  </form>

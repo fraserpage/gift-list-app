@@ -10,6 +10,7 @@ router.get('/:id', groupCtrl.show)
 router.get('/:id/edit', groupCtrl.edit)
 
 router.post('/', groupCtrl.create)
+router.delete('/:id', groupCtrl.delete)
 router.put('/:id', groupCtrl.update)
 router.put('/:id/invite', groupCtrl.invite)
 

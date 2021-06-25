@@ -110,6 +110,11 @@ button {
 button:hover{
   background: blue;
 }
+button[disabled] {
+  background: #a7a7a7;
+  color: #e9e9e9;
+  cursor: not-allowed;
+}
 .add{
   cursor: pointer;
   user-select: none;

@@ -6,7 +6,7 @@
 <% if (group.owner._id.equals(user._id)){ %>
   <h4>You are the group admin</h4>
   You can <a href="/groups/<%= group._id %>/edit">Edit the group name and description.</a>
-
+  <%- include('../partials/groups/delete') %>
   <%- include('../partials/groups/invite') %>
 <% }
 else{ %>
