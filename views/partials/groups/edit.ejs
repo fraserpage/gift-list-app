@@ -1,0 +1,14 @@
+<form id="edit-group" action="/groups/<%= group._id %>?_method=PUT" method="post">
+
+  <label for="name" class="input-sizer" data-value="<%= group.name %>">
+    <span>Group:</span>
+    <textarea name="name" id="name" oninput="this.parentNode.dataset.value = this.value" rows="1"><%= group.name %></textarea>
+  </label>
+
+  <label for="desc" class="input-sizer" data-value="<%= group.desc %>">
+    <span>Description:</span>
+    <textarea name="desc" id="desc" oninput="this.parentNode.dataset.value = this.value" rows="1"><%= group.desc %></textarea>
+  </label>
+
+  <button type="submit">Update</button>
+</form>
