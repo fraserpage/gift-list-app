@@ -1,7 +1,27 @@
 <%- include('../partials/header') %> 
-<small>Group:</small>
-<h1><%= group.name %> </h1>
-<p><%= group.desc %> </p>
+<div id="group-header">
+  <small>Group:</small>
+  <h1><%= group.name %> </h1>
+  <p class="subhead"><%= group.desc %> 
+    <button class="small" onclick="document.getElementById('group-header').remove()">Edit</button></p>
+</div>
+
+<form id="edit-group" action="/groups/<%= group._id %>?_method=PUT" method="post">
+
+  <label for="name" class="input-sizer" data-value="<%= group.name %>">
+    <span>Group:</span>
+    <textarea name="name" id="name" oninput="this.parentNode.dataset.value = this.value" rows="1"><%= group.name %></textarea>
+  </label>
+
+  <label for="desc" class="input-sizer" data-value="<%= group.desc %>">
+    <span>Description:</span>
+    <textarea name="desc" id="desc" oninput="this.parentNode.dataset.value = this.value" rows="1"><%= group.desc %></textarea>
+  </label>
+
+  <button type="submit">Update</button>
+</form>
+
+
 <p>Group members: <%= group.users.map(user => user.name).join(", ") %> </p>
 <% if (group.owner._id.equals(user._id)){ %>
   <h4>You are the group admin</h4>

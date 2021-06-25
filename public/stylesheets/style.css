@@ -41,6 +41,12 @@ h2{
 strong{
   --wght: 800;
 }
+p.subhead {
+  font-size: 1.2rem;
+  --wght: 450;
+  --mono: 0;
+  margin-bottom: 4rem;
+}
 
 /* Nav bar */
 header{
@@ -115,6 +121,10 @@ button[disabled] {
   color: #e9e9e9;
   cursor: not-allowed;
 }
+button.small{
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
 .add{
   cursor: pointer;
   user-select: none;
@@ -161,8 +171,51 @@ a.group:hover h2{
   color: blue;
 }
 
+/*Group show*/
+#group-header {
+  width: fit-content;
+}
+#group-header button{
+  float: right;
+  margin: 0;
+}
 
+/* Edit group */
+#group-header ~ form#edit-group {
+  display: none;
+}
 
+form#edit-group span {
+  padding-left:0.2rem;
+  font-size:0.8rem;
+  --wght:400
+}
+form#edit-group .input-sizer{
+  align-items: stretch;
+}
+
+form#edit-group .input-sizer::after,
+form#edit-group .input-sizer input,
+form#edit-group .input-sizer textarea {
+  grid-area: 2 / 1;
+}
+form#edit-group [for="name"].input-sizer::after,
+form#edit-group #name {
+  font-size: 3rem;
+  margin: 0;
+  margin-bottom: 2rem;
+  --wght: 1000;
+}
+form#edit-group [for="desc"].input-sizer::after,
+form#edit-group #desc {
+  font-size: 1.2rem;
+  --wght: 450;
+  --mono: 0;
+}
+form#edit-group button{
+  margin-bottom: 3rem;
+  margin-left: 0.4rem;
+}
 /* Gift lists */
 .gift-list{
   width: 33rem;

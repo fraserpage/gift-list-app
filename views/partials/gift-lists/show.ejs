@@ -30,8 +30,8 @@
             </span>
             <span class="claimed">
               <%- gift.claimedBy ? 
-              gift.claimedBy._id.equals(user._id) ? "You're getting this"
-              : "Claimed by "+gift.claimedBy.name 
+                gift.claimedBy._id.equals(user._id) ? "You're getting this"
+                : "Claimed by "+gift.claimedBy.name 
               : include('../gifts/claim', {gift, list, group}) %>
             </span>
           </li>
