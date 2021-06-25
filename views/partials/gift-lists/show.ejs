@@ -1,8 +1,8 @@
 <% for (let list of lists){ %> 
   <% if (list.user._id.equals(user._id)){ %> 
     <!-- update list form goes inline here? -->
-    <div class="gift-list">
-      <h3>Your list</h3>
+    <div class="gift-list yours">
+      <h2>Your list</h2>
       <p><%= list.desc %> </p>
       <ul>
         <% for (let gift of list.gifts){ %> 
@@ -17,17 +17,20 @@
     </div>
   <% }
   else{ %> 
-    <div class="gift-list">
+    <div class="gift-list others">
       <h2><%= list.user.firstName+"'s list" %> </h2>
       <p><%= list.desc %> </p>
       <ul>
         <% for (let gift of list.gifts){ %> 
-          <li>
-            <strong><%= gift.name %> </strong> 
-            <%= gift.note ? "- "+gift.note : "" %> 
-            <%- gift.link ? " - <a href='"+gift.link+"'>Link</a>" : "" %>
-
-            <%- gift.claimedBy ? "Claimed by "+gift.claimedBy.name : include('../gifts/claim', {gift, list, group}) %>
+          <li class="<%= gift.claimedBy ? 'claimed' : 'free' %>" onclick="this.getElementsByTagName('button')[0].click()">
+            <span class="gift-desc">
+              <strong><%= gift.name %> </strong> 
+              <%= gift.note ? "- "+gift.note : "" %> 
+              <%- gift.link ? " - <a href='"+gift.link+"'>Link</a>" : "" %>
+            </span>
+            <span class="claimed">
+              <%- gift.claimedBy ? "Claimed by "+gift.claimedBy.name : include('../gifts/claim', {gift, list, group}) %>
+            </span>
           </li>
         <% } %>   
       </ul> 
