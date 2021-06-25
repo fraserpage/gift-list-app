@@ -178,6 +178,7 @@ a.group:hover h2{
 #group-header button{
   float: right;
   margin: 0;
+  margin-left: 0.5rem;
 }
 
 /* Edit group */
@@ -216,15 +217,74 @@ form#edit-group button{
   margin-bottom: 3rem;
   margin-left: 0.4rem;
 }
-/* Gift lists */
+
+/* Delete group */
+#delete-group{
+  display: none;
+}
+#delete-group.modal{
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 5px 30px rgb(63 63 63);
+  padding: 3rem 6rem;
+  background: white;
+  width: clamp(60vw, 33rem, 90vw);
+}
+#delete-group label{
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+#delete-group span {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.22rem;
+  --casl: 0;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  line-height: 2rem;
+  cursor: pointer;
+}
+#delete-group span:hover{
+  color: blue;
+}
+
+/* Group/Gift lists card*/
+a.group,
 .gift-list{
+  display: block;
   width: 33rem;
   max-width: 100%;
   box-shadow: 0 5px 30px #ddd;
   padding: 1rem 1.5rem;
   margin: 2rem 0;
   border-radius: 0.4rem;
+  transition: all 0.2s;
 }
+
+/* Group index */
+a.group:hover{
+  box-shadow: 0 5px 30px #aaa;
+}
+a.group h2 {
+  font-size: 2.7rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  --wght: 1000;
+}
+a.group {
+  margin: 3rem 0;
+  padding-bottom: 3rem;
+}
+
+
+/* Gift lists */
+
 .gift-list li:first-of-type{
   border-top: 1px solid #ddd;
 }
