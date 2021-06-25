@@ -1,43 +1,17 @@
-<form action="/groups/<%= group._id %>/gift-list" method="post">
+<div class="gift-list yours">
+  <form action="/groups/<%= group._id %>/gift-list" method="post">
 
-  <h2>Make a gift list</h2>
+    <h2>Make a gift list</h2>
 
-  <label for="desc">Description/Note</label>
-  <textarea name="desc" id="desc" cols="30" rows="2"></textarea>
+    <label for="desc">Description/Note</label>
+    <textarea name="desc" id="desc" cols="30" rows="2"></textarea>
 
-  <h4>Add something to it</h4>
-  <div id="gifts-form">
-    <label for="gift0name">Gift</label>
-    <input type="text" name="gifts[0][name]" id="gift0name">
-    <label for="gift0note">Note</label>
-    <input type="text" name="gifts[0][note]" id="gift0note">
-    <label for="gift0link">Link</label>
-    <input type="url" name="gifts[0][link]" id="gift0link">  
-  </div>
-  
-  <span class="add" id="add-gift">Add another item</span>
+    <h4>Add something to it</h4>
+    <%- include('../gifts/gifts-form') %> 
+    
+    <span class="add" id="add-gift">Add another item</span>
 
-  <button type="submit">Lets go</button>
-</form>
-
-<script>
-  let giftsForm = document.getElementById('gifts-form')
-  let numGifts = 0
-  document.getElementById('add-gift').addEventListener('click',function(){
-    numGifts++
-    let newGiftElem = document.createElement('div')
-  
-    newGiftElem.innerHTML = 
-    `<label for="gift${numGifts}name">Gift</label>
-    <input type="text" name="gifts[${numGifts}][name]" id="gift${numGifts}name">
-
-    <label for="gift${numGifts}note">Note</label>
-    <input type="text" name="gifts[${numGifts}][note]" id="gift${numGifts}note">
-
-    <label for="gift${numGifts}link">Link</label>
-    <input type="text" name="gifts[${numGifts}][link]" id="gift${numGifts}link">`
-
-    giftsForm.appendChild(newGiftElem)
-  })
-
-</script>
+    <button type="submit">Lets go</button>
+  </form>
+</div>
+<%- include('../gifts/gifts-script') %> 
