@@ -35,8 +35,11 @@ async function show(req,res){
   })
 }
 
-function newGroup(){
-  res.send('new group form... currently showing the new form on the index page')
+function newGroup(req, res){
+  res.render('groups/new',{
+    title:'Create a group',
+    user: req.user,
+  })
 }
 
 async function create(req,res){
