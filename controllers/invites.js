@@ -10,10 +10,8 @@ async function show(req, res){
   const invite = group.invites.id(req.params.inviteId)
 
   if (req.user){
-    console.log('user is logged in')
     if (group.users.some((user)=>user.equals(req.user._id))){
     // user is already in the group
-      console.log('user is already in group')
       res.redirect('/groups/'+req.params.id)
       return
     }
@@ -50,18 +48,15 @@ async function show(req, res){
 async function processInvite(req, res) {
   // does session invite exist? 
   if (req.session.invite){
-    console.log('session exists',req.session.invite)
     const group = await Group.findById(req.session.invite.group)
     const invite = group.invites.id(req.session.invite.invite)
     delete req.session.invite
     // is the invite still valid?
     if (invite){
-      console.log('invite exists',invite)
       // add the user to the group and remove the invite
       group.users.push(req.user._id)
       invite.remove()
       await group.save()
-      console.log('group after invite removed',group)
     }
     // do we want to send a flash message here?
     res.redirect('/groups/'+group._id)
