@@ -2,9 +2,12 @@
 <small>Group:</small>
 <h1><%= group.name %> </h1>
 <p><%= group.desc %> </p>
+<p>Group members: <%= group.users.map(user => user.name).join(", ") %> </p>
 <small>Group admin: <%= group.owner.name %> </small>
 <% if (group.owner._id.equals(user._id)){ %>
-  <a href="/group/<%= group._id %>/update">Edit group</a>
+  <a href="/groups/<%= group._id %>/edit">Edit group</a>
+
+  <%- include('../partials/groups/invite') %>
 <% } %> 
 <% if (group.owner._id.equals(user._id) && group.invites.length){ %>
   <p>Outstanding invites:

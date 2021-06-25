@@ -5,6 +5,10 @@ const giftSchema = new Schema({
   name: String,
   note: String,
   link: String,
+  claimedBy: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User'
+  }
 }, 
 {
   timestamps: true

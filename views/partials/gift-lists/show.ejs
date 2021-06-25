@@ -1,23 +1,37 @@
 <% for (let list of lists){ %> 
   <% if (list.user._id.equals(user._id)){ %> 
-    this should be the update list form
-    <h3>Your list</h3>
-    <p><%= list.desc %> </p>
-    <% for (let gift of list.gifts){ %> 
-      <p><%= gift.name %> </p>
-      <p><%= gift.note %> </p>
-      <p><%= gift.link %> </p>
-    <% } %> 
-
+    <!-- update list form goes inline here? -->
+    <div class="gift-list">
+      <h3>Your list</h3>
+      <p><%= list.desc %> </p>
+      <ul>
+        <% for (let gift of list.gifts){ %> 
+          <li>
+            <strong><%= gift.name %> </strong> 
+            <%= gift.note ? "- "+gift.note : "" %> 
+            <%- gift.link ? " - <a href='"+gift.link+"'>Link</a>" : "" %>
+          </li>
+        <% } %> 
+      </ul>
+      <%- include('../gifts/new', {list, group})  %> 
+    </div>
   <% }
   else{ %> 
-    <h3><%= list.user.firstName+"'s list" %> </h3>
-  <p><%= list.desc %> </p>
-  <% for (let gift of list.gifts){ %> 
-    <p><%= gift.name %> </p>
-    <p><%= gift.note %> </p>
-    <p><%= gift.link %> </p>
-  <% } %> 
+    <div class="gift-list">
+      <h2><%= list.user.firstName+"'s list" %> </h2>
+      <p><%= list.desc %> </p>
+      <ul>
+        <% for (let gift of list.gifts){ %> 
+          <li>
+            <strong><%= gift.name %> </strong> 
+            <%= gift.note ? "- "+gift.note : "" %> 
+            <%- gift.link ? " - <a href='"+gift.link+"'>Link</a>" : "" %>
+
+            <%- gift.claimedBy ? "Claimed by "+gift.claimedBy.name : include('../gifts/claim', {gift, list, group}) %>
+          </li>
+        <% } %>   
+      </ul> 
+    </div>
   <% } %> 
 
 <% } %> 

@@ -6,6 +6,7 @@
     <a href="/groups/<%= group._id %>">
       <h2><%= group.name %></h2>  
       <p><%= group.desc %></p>
+      <p>Group members: <%= group.users.map(user => user.name).join(", ") %> </p>
     </a>
 <% }
 }

@@ -34,7 +34,7 @@ async function show(req, res){
       req.session.invite = {group: req.params.id, invite: req.params.inviteId};
       res.render('message',{
         title: 'Login',
-        message: "Welcome! Login with Google to get started.",
+        message: "Welcome! Login with Google to join the group.",
         user: req.user,
       })
     }
@@ -64,7 +64,7 @@ async function processInvite(req, res) {
       console.log('group after invite removed',group)
     }
     // do we want to send a flash message here?
-    res.redirect('/groups/'+req.params.id)
+    res.redirect('/groups/'+group._id)
   }
   else{
     res.redirect('/');

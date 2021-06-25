@@ -29,8 +29,10 @@ function invite(group, invite, reqUser, reqBody){
     html: `<h1>Join ${reqUser.name} on Gift List App</h1>
     <p>Gift List App helps you coordinate gift giving. View the people in your groups gift list, claim a gift and create your own gift list.</p>
     <hr>
-    <p>${reqUser.firstName} added a message: ${reqBody.message}</p>
-    <a href="http://localhost:3000/groups/${group._id}/invite/${invite._id}">Accept ${reqUser.firstName}'s invitation to join the gift group: ${reqBody.name}</a>
+    ${reqBody.message ? 
+      `<p>${reqUser.firstName} added a message: ${reqBody.message}</p>`
+      :``}
+    <a href="http://localhost:3000/groups/${group._id}/invite/${invite._id}">Accept ${reqUser.firstName}'s invitation to join the gift group: ${group.name}</a>
     `
   }
   mail(mailOptions)
