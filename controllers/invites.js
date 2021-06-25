@@ -7,6 +7,14 @@ module.exports = {
 
 async function show(req, res){
   const group = await Group.findById(req.params.id)
+  if (!group) {
+    res.render('message',{
+      title: 'Sorry!',
+      message: "It appears that group has been deleted.",
+      user: req.user,
+    })
+    return
+  }
   const invite = group.invites.id(req.params.inviteId)
 
   if (req.user){
