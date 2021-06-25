@@ -1,33 +1,71 @@
+:root {
+  --wght: 400; /* 300 - 1000 */
+  --slnt: 0; /* -15 - 0 */
+  --mono: 0.5; /* 0 - 1 */
+  --casl: 0.5; /* 0 - 1 */
+}
+
 *,
 *::before,
 *::after { 
+  font-variation-settings:    "wght" var(--wght),
+                              "slnt" var(--slnt),
+                              "MONO" var(--mono),
+                              "CASL" var(--casl);
   box-sizing: border-box;
 }
 
+
 body {
   padding: 0;
-  margin: 0 5vw 5vw;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 9rem 5vw 5vw;
+  font: 14px "Recursive", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: blue;
 }
 
-header{
+h1{
+  font-size: 3rem;
+  margin: 0;
   margin-bottom: 2rem;
+  --wght: 1000;
+}
+h2{
+  font-size: 2rem;
+  margin: 0;
+  margin-top: 2rem;
+  --wght: 800;
+}
+strong{
+  --wght: 800;
+}
+
+/* Nav bar */
+header{
+  background: blue;
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 5px 30px #ddd;
 }
 
 nav {
-  background: blue;
-  margin: 0 -5vw;
-  padding: 1rem calc(5vw - 1rem);
+  margin: 0 -1rem;
+  padding: 1rem 5vw;
   display: flex;
   align-items: center;
 }
 
 nav > *{
   margin: 0 1rem;
+}
+nav #logo{
+  color: white;
+  --wght: 1000;
+  font-size: 1.3rem;
 }
 nav :last-child {
   margin-left: auto;
@@ -45,7 +83,7 @@ nav img {
 nav a{
   margin: 0 1rem;
   color:white;
-  font-weight:bold;
+  --wght: 600;
   text-decoration:none;
 }
 nav a:hover{
@@ -55,6 +93,7 @@ nav a:hover{
 
 .button,
 button {
+  font-family: "Recursive", Helvetica, Arial, sans-serif;
   display: block;
   width: fit-content;
   cursor: pointer;
@@ -63,7 +102,7 @@ button {
   border: none;
   padding: 0.75rem 1rem;
   color: white;
-  font-weight: bold;
+  --wght: 600;
   font-size: 1rem;
   margin: 1rem 0;
 }
@@ -93,17 +132,32 @@ button:hover{
 
 label{
   display: block;
-  font-weight:bold;
+  --wght: 600;
   margin-top: 0.5rem
 }
+
 
 input,
 textarea{
   font-size: 1rem;
   border: black 2px solid;
   padding: 0.5rem;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Recursive", Helvetica, Arial, sans-serif;
 }
+
+
+/* Group index */
+a.group{
+  color: black;
+  text-decoration: none;
+}
+a.group:hover h2{
+  text-decoration: underline;
+  color: blue;
+}
+
+
+
 /* Gift lists */
 .gift-list{
   width: 33rem;
@@ -132,15 +186,58 @@ form .gift,
   outline: none;
   border-bottom-color: blue;
 }
-.gift-list li:before,
+.gift-list.yours li:before,
 #gifts-form .gift:before {
   content: "•";
   padding-right: 0.5rem;
 }
 
+.gift-list.others li:before{
+  content: '\2713';
+  padding-right: 0.5rem;
+  display: inline-block;
+  height: 1.2rem;
+  width: 1.2rem;
+  border: 2px solid black;
+  font-size: 28px;
+  line-height: 0.7rem;
+  color: transparent;
+  --wght: 1000;
+}
+.gift-list.others li.free:hover{
+  cursor: pointer;
+}
+.gift-list.others li.free:hover:before{
+  color: blue;
+}
+.gift-list.others li.free:hover button{
+  background-color: blue;
+}
+.gift-list.others li.claimed:before{
+  color: grey;
+}
+.gift-list.others li.claimed span.gift-desc{
+  text-decoration: line-through;
+  color:#545454;
+}
+span.claimed {
+  --slnt: -10;
+}
+span.gift-desc{
+  display: inline-block;
+  margin: 0 0.7rem;
+}
+form.claim-gift {
+  display: inline-block;
+}
+form.claim-gift button {
+  margin: 0;
+  padding: 0.5rem;
+}
 #gifts-form + .button-row{
-  margin-left:2rem;
+  margin-left:1rem;
   display: flex;
+  align-items: center;
 }
 #gifts-form + .button-row button{
   margin-left:auto;
@@ -179,7 +276,7 @@ form .gift,
 }
 .input-sizer:first-of-type::after,
 .input-sizer:first-of-type  input{
-  font-weight: bold;
+  --wght: 800;
 }
 .input-sizer::after {
   content: attr(data-value) ' ';
