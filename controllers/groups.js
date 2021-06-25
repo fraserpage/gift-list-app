@@ -89,7 +89,6 @@ async function invite(req, res){
   if (req.body.invites.length){
     group.invites.push(...req.body.invites)
     group = await group.save()
-    console.log(group)
     for (let invite of req.body.invites){
       let inviteObj = group.invites.find(i=>i.email === invite.email)
       sendMail.invite(group, inviteObj, req.user, req.body)

@@ -10,7 +10,6 @@ module.exports = {
 async function create(req,res){
   const group = await Group.findById(req.params.id)
   const list = group.giftLists.id(req.params.listId)
-  console.log(req.body)
   list.gifts.push(...req.body.gifts)
   await group.save()
   res.redirect('/groups/'+req.params.id)
