@@ -1,32 +1,22 @@
 <%- include('../partials/header') %> 
+
 <div id="group-header">
   <small>Group:</small>
   <h1><%= group.name %> </h1>
   <p class="subhead"><%= group.desc %> 
-    <button class="small" onclick="document.getElementById('group-header').remove()">Edit</button></p>
+    <% if (group.owner._id.equals(user._id)){ %>
+      <button class="small" onclick="document.getElementById('delete-group').classList.add('modal')">Delete</button>
+      <button class="small" onclick="document.getElementById('group-header').remove()">Edit</button>
+    <% } %> 
+  </p>
 </div>
 
-<form id="edit-group" action="/groups/<%= group._id %>?_method=PUT" method="post">
-
-  <label for="name" class="input-sizer" data-value="<%= group.name %>">
-    <span>Group:</span>
-    <textarea name="name" id="name" oninput="this.parentNode.dataset.value = this.value" rows="1"><%= group.name %></textarea>
-  </label>
-
-  <label for="desc" class="input-sizer" data-value="<%= group.desc %>">
-    <span>Description:</span>
-    <textarea name="desc" id="desc" oninput="this.parentNode.dataset.value = this.value" rows="1"><%= group.desc %></textarea>
-  </label>
-
-  <button type="submit">Update</button>
-</form>
-
+<%- include('../partials/groups/edit') %> 
+<%- include('../partials/groups/delete') %>
 
 <p>Group members: <%= group.users.map(user => user.name).join(", ") %> </p>
 <% if (group.owner._id.equals(user._id)){ %>
   <h4>You are the group admin</h4>
-  You can <a href="/groups/<%= group._id %>/edit">Edit the group name and description.</a>
-  <%- include('../partials/groups/delete') %>
   <%- include('../partials/groups/invite') %>
 <% }
 else{ %>
