@@ -39,7 +39,8 @@ app.use('/', require('./routes/index'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/invites'));
 app.use('/groups', ensureLoggedIn('/login'), require('./routes/groups'));
-app.use('/', ensureLoggedIn('/login'), require('./routes/giftLists'));
+app.use('/', ensureLoggedIn('/login'), require('./routes/giftLists'))
+app.use('/', ensureLoggedIn('/login'), require('./routes/gifts'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
