@@ -32,7 +32,7 @@ function invite(group, invite, reqUser, reqBody){
     ${reqBody.message ? 
       `<p>${reqUser.firstName} added a message: ${reqBody.message}</p>`
       :``}
-    <a href="http://localhost:3000/groups/${group._id}/invite/${invite._id}">Accept ${reqUser.firstName}'s invitation to join the gift group: ${group.name}</a>
+    <a href="${process.env.DOMAIN}/groups/${group._id}/invite/${invite._id}">Accept ${reqUser.firstName}'s invitation to join the gift group: ${group.name}</a>
     `
   }
   mail(mailOptions)
