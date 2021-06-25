@@ -1,6 +1,9 @@
 # gift-list-app
 An app that solves the problem of communicating and coordinating gifts
 
+## Use the app
+* [Open the app on Heroku](https://giftlists-app.herokuapp.com/)
+
 ## ERD
 * [Draft 1](https://lucid.app/lucidchart/285fbeb7-c562-41ac-862c-5b7ce53f4e46/view?page=0_0#) ([Edit link](https://lucid.app/lucidchart/285fbeb7-c562-41ac-862c-5b7ce53f4e46/edit?beaconFlowId=35D28D8593A7476E&page=0_0#))
 
