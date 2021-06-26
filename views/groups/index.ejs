@@ -6,7 +6,7 @@
     <a class="group" href="/groups/<%= group._id %>">
       <h2><%= group.name %></h2>  
       <p class="subhead"><%= group.desc %></p>
-      <p>Group members: <%= group.users.map(user => user.name).join(", ") %> </p>
+      <p class="members-list">Group members: <%= group.users.map(user => group.owner._id.equals(user._id) ? user.name+" (admin)":user.name ).join(", ") %> </p>
     </a>
 <% }
 }
