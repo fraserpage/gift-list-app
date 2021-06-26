@@ -183,39 +183,40 @@ a.group:hover h2{
   margin-left: 0.5rem;
 }
 
-/* Edit group */
-#group-header ~ form#edit-group {
+/* Edit/New group form */
+#group-header ~ form.group-form {
   display: none;
 }
 
-form#edit-group span {
+form.group-form span {
   padding-left:0.2rem;
   font-size:0.8rem;
   --wght:400
 }
-form#edit-group .input-sizer{
+form.group-form .input-sizer{
   align-items: stretch;
+  padding: 0;
 }
 
-form#edit-group .input-sizer::after,
-form#edit-group .input-sizer input,
-form#edit-group .input-sizer textarea {
+form.group-form .input-sizer::after,
+form.group-form .input-sizer input,
+form.group-form .input-sizer textarea {
   grid-area: 2 / 1;
 }
-form#edit-group [for="name"].input-sizer::after,
-form#edit-group #name {
+form.group-form [for="name"].input-sizer::after,
+form.group-form #name {
   font-size: 3rem;
   margin: 0;
   margin-bottom: 2rem;
   --wght: 1000;
 }
-form#edit-group [for="desc"].input-sizer::after,
-form#edit-group #desc {
+form.group-form [for="desc"].input-sizer::after,
+form.group-form #desc {
   font-size: 1.2rem;
   --wght: 450;
   --mono: 0;
 }
-form#edit-group button{
+form.group-form button{
   margin-bottom: 3rem;
   margin-left: 0.4rem;
 }
