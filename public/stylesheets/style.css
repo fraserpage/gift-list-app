@@ -45,13 +45,13 @@ p.subhead {
   font-size: 1.2rem;
   --wght: 450;
   --mono: 0;
-  margin-bottom: 4rem;
 }
 
 /* Nav bar */
 header{
   background: blue;
   position: fixed;
+  z-index: 1;
   top:0;
   left: 0;
   right: 0;
@@ -111,6 +111,7 @@ button {
   --wght: 600;
   font-size: 1rem;
   margin: 1rem 0;
+  transition: background-color 0.2s;
 }
 .button:hover,
 button:hover{
@@ -174,6 +175,7 @@ a.group:hover h2{
 /*Group show*/
 #group-header {
   width: fit-content;
+  margin-bottom: 4rem;
 }
 #group-header button{
   float: right;
@@ -302,7 +304,7 @@ form .gift,
 
 #gifts-form input:focus-visible {
   outline: none;
-  border-bottom-color: blue;
+  box-shadow: 0 2px 0px blue;
 }
 .gift-list.yours li:before,
 #gifts-form .gift:before {
@@ -362,6 +364,7 @@ form.claim-gift button {
 }
 .gift{
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 .input-sizer {
@@ -390,7 +393,8 @@ form.claim-gift button {
   background: none;
   appearance: none;
   border: none;
-  border-bottom: 1px solid #666;
+  box-shadow: 0 1px 0px #666;
+  transition: all 0.2s;
 }
 .input-sizer:first-of-type::after,
 .input-sizer:first-of-type  input{
