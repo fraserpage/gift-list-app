@@ -3,30 +3,29 @@
 <div id="group-header">
   <small>Group:</small>
   <h1><%= group.name %> </h1>
-  <p class="subhead"><%= group.desc %> &nbsp;
-    <% if (group.owner._id.equals(user._id)){ %>
-      <button class="small" onclick="document.getElementById('delete-group').classList.add('modal')">Delete</button>
+  <p class="subhead"><%= group.desc %></p>
+  <p class="members-list">Group members: <%= group.users.map(user => group.owner._id.equals(user._id) ? user.name+" (admin)":user.name ).join(", ") %> </p>
+
+  <% if (group.owner._id.equals(user._id) && group.invites.length){ %>
+    <p>Outstanding invites:
+      <%- group.invites.map(e => `<a href="mailto:${e.email}">${e.email}</a>`).join(", ") %> 
+    </p>
+    <div class="buttons">
+      <button class="small" onclick="document.getElementById('invite-form').classList.add('modal')">Invite</button>
       <button class="small" onclick="document.getElementById('group-header').remove()">Edit</button>
-    <% } %> 
-  </p>
+      <button class="small" onclick="document.getElementById('delete-group').classList.add('modal')">Delete</button>
+    </div>
+  <% } %>
 </div>
 
+<div id="invite-form">
+  <span aria-label="close" onclick="document.getElementById('invite-form').classList.remove('modal')">x</span>
+  <%- include('../partials/groups/invite') %>
+</div>
 <%- include('../partials/groups/edit') %> 
 <%- include('../partials/groups/delete') %>
 
-<p>Group members: <%= group.users.map(user => user.name).join(", ") %> </p>
-<% if (group.owner._id.equals(user._id)){ %>
-  <h4>You are the group admin</h4>
-  <%- include('../partials/groups/invite') %>
-<% }
-else{ %>
-  <p>Group admin: <%= group.owner.name %> </p>
-<% } %> 
-<% if (group.owner._id.equals(user._id) && group.invites.length){ %>
-  <p>Outstanding invites:
-    <%- group.invites.map(e => `<a href="mailto:${e.email}">${e.email}</a>`).join(", ") %> 
-  </p>
-<% } %>
+
 
 <%# Only show the new gift list form if the user doesn't have one already %> 
 <% if ( ! group.giftLists.some( list => list.user._id.equals(user._id) )){ %> 
