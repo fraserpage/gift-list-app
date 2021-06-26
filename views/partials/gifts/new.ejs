@@ -1,10 +1,8 @@
 <form class="new-gift" action="/groups/<%= group._id %>/gift-lists/<%= list._id %>" method="post">
   
-  <%- include('./gifts-form') %> 
+  <div id="gifts-form"></div>
   <div class="button-row">
     <span class="add" id="add-gift">Add another item</span>
     <button type="submit">Update my list</button>
   </div>
 </form>
-
-<%- include('./gifts-script') %> 
