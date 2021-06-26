@@ -50,9 +50,11 @@ function addInvite(){
   numInvites++
   let newInviteElem = document.createElement('div')
 
-  newInviteElem.innerHTML = 
-  `<label for="invite${numInvites}">Email</label>
-  <input type="email" name="invites[${numInvites}][email]" id="invite${numInvites}">`
+  newInviteElem.innerHTML = `
+  <label class="input-sizer" for="invite${numInvites}">
+    <span>Email &rarr;</span>
+    <input type="email" name="invites[${numInvites}][email]" id="invite${numInvites}" placeholder="friend@gmail.com" onInput="this.parentNode.dataset.value = this.value" size="16">
+  </label>`
 
   invites.appendChild(newInviteElem)
 }
