@@ -3,7 +3,7 @@
 <div id="group-header">
   <small>Group:</small>
   <h1><%= group.name %> </h1>
-  <p class="subhead"><%= group.desc %> 
+  <p class="subhead"><%= group.desc %> &nbsp;
     <% if (group.owner._id.equals(user._id)){ %>
       <button class="small" onclick="document.getElementById('delete-group').classList.add('modal')">Delete</button>
       <button class="small" onclick="document.getElementById('group-header').remove()">Edit</button>
