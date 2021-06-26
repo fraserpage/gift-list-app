@@ -2,7 +2,7 @@
   <form id="delete-group" action="/groups/<%= group._id %>?_method=DELETE" method="post">
 
     <span aria-label="close" onclick="document.getElementById('delete-group').classList.remove('modal')">x</span>
-
+    <h2>DANGER! Deleting can't be undone!</h2>
     <label for="desc">Type "<%= group.name %>" to delete</label>
     <input name="desc" id="desc" type="text" oninput="this.value==='<%= group.name %>' ? this.nextElementSibling.disabled = false: this.nextElementSibling.disabled = true">
 
