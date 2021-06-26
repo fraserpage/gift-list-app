@@ -1,9 +1,13 @@
+/* Add a gift to a form */ 
 let giftsForm = document.getElementById('gifts-form')
 let numGifts = 0
 
-addGift()
 
-if(giftsForm) document.getElementById('add-gift').addEventListener('click', addGift)
+
+if(giftsForm){
+  addGift()
+  document.getElementById('add-gift').addEventListener('click', addGift)
+} 
 
 function addGift(){
   numGifts++
@@ -28,4 +32,27 @@ function addGift(){
     </div> `
 
   giftsForm.appendChild(newGiftElem)
+}
+
+/* Add another invitee to a form */ 
+let invitesElem = document.getElementById('invites')
+let addInviteBtn = document.getElementById('add-invite')
+let numInvites = 0
+
+
+
+if (invitesElem && addInviteBtn){
+  addInvite()
+  addInviteBtn.addEventListener('click', addInvite)
+} 
+
+function addInvite(){
+  numInvites++
+  let newInviteElem = document.createElement('div')
+
+  newInviteElem.innerHTML = 
+  `<label for="invite${numInvites}">Email</label>
+  <input type="email" name="invites[${numInvites}][email]" id="invite${numInvites}">`
+
+  invites.appendChild(newInviteElem)
 }

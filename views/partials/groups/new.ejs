@@ -8,10 +8,7 @@
 
   <div id="invites">
     <h3>Invite people:</h3>
-
-    <label for="invite0">Email</label>
-    <input type="email" name="invites[0][email]" id="invite0">
-
+    <%# Invites added via scripts.js %> 
   </div>
 
   <span class="add" id="add-invite">Add another email</span>
@@ -21,21 +18,3 @@
 
   <button type="submit">Lets go</button>
 </form>
-
-<script>
-
-  let invites = document.getElementById('invites')
-  let addInviteBtn = document.getElementById('add-invite')
-  let numInvites = 0
-  addInviteBtn.addEventListener('click',()=>{
-    numInvites++
-    let newInviteElem = document.createElement('div')
-  
-    newInviteElem.innerHTML = 
-    `<label for="invite${numInvites}">Email</label>
-    <input type="email" name="invites[${numInvites}][email]" id="invite${numInvites}">`
-
-    invites.appendChild(newInviteElem)
-  })
-  addInviteBtn.click()
-</script>
