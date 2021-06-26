@@ -1,0 +1,13 @@
+<div>
+  <label for="name" class="input-sizer" data-value="<%= group.name || "Group Name" %>">
+    <span>Group:</span>
+    <textarea required name="name" id="name" oninput="this.parentNode.dataset.value = this.value" rows="1" placeholder="Group Name"><%= group.name %></textarea>
+  </label>
+</div>
+
+<div>
+  <label for="desc" class="input-sizer" data-value="<%= group.desc || "A short description of the group (optional)" %>">
+    <span>Description:</span>
+    <textarea name="desc" id="desc" oninput="this.parentNode.dataset.value = this.value" rows="1" placeholder="A short description of the group (optional)"><%= group.desc %></textarea>
+  </label>
+</div>

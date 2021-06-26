@@ -1,10 +1,6 @@
-<form action="/groups/" method="post">
+<form action="/groups/" method="post" class="group-form">
 
-  <label for="name">Group name</label>
-  <input type="text" name="name" id="name">
-
-  <label for="desc">Description</label>
-  <textarea name="desc" id="desc" cols="30" rows="2"></textarea>
+  <%- include('form-fields-group-name-desc', {group:[]}) %> 
 
   <div id="invites">
     <h3>Invite people:</h3>
