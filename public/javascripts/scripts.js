@@ -1,10 +1,10 @@
+/* -------------------- */ 
 /* Add a gift to a form */ 
+/* -------------------- */ 
 let giftsForm = document.getElementById('gifts-form')
 let numGifts = 0
 
-
-
-if(giftsForm){
+if (giftsForm){
   addGift()
   document.getElementById('add-gift').addEventListener('click', addGift)
 } 
@@ -34,12 +34,12 @@ function addGift(){
   giftsForm.appendChild(newGiftElem)
 }
 
+/* ----------------------------- */ 
 /* Add another invitee to a form */ 
+/* ----------------------------- */ 
 let invitesElem = document.getElementById('invites')
 let addInviteBtn = document.getElementById('add-invite')
 let numInvites = 0
-
-
 
 if (invitesElem && addInviteBtn){
   addInvite()
