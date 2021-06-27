@@ -29,5 +29,5 @@ async function claim(req,res){
 }
 
 function deleteGift(req,res){
-  res.send('update gift')
+  res.send('delete gift')
 }
