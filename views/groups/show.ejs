@@ -6,10 +6,12 @@
   <p class="subhead"><%= group.desc %></p>
   <p class="members-list">Group members: <%= group.users.map(user => group.owner._id.equals(user._id) ? user.name+" (admin)":user.name ).join(", ") %> </p>
 
-  <% if (group.owner._id.equals(user._id) && group.invites.length){ %>
+  <% if (group.owner._id.equals(user._id)){ %>
+    <% if (group.invites.length){ %>
     <p>Outstanding invites:
       <%- group.invites.map(e => `<a href="mailto:${e.email}">${e.email}</a>`).join(", ") %> 
     </p>
+    <% } %>
     <div class="buttons">
       <button class="small" onclick="document.getElementById('invite-form').classList.add('modal')">Invite</button>
       <button class="small" onclick="document.getElementById('group-header').remove()">Edit</button>
