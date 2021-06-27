@@ -62,7 +62,7 @@ async function create(req,res){
 }
 
 async function deleteOne(req,res){
-  await Group.findByIdAndDelete(req.params.id)
+  await Group.deleteOne({ _id: req.params.id, owner: req.user._id} )
   res.redirect('/groups')
 }
 
@@ -77,51 +77,54 @@ async function edit(req,res){
 
 async function update(req, res){
   const group = await Group.findById(req.params.id)
-  group.name = req.body.name
-  group.desc = req.body.desc
-  await group.save()
+  if (group.owner._id.equals(req.user._id)){
+    group.name = req.body.name
+    group.desc = req.body.desc
+    await group.save()
+  }
   res.redirect('/groups/'+req.params.id)
 }
 
 async function invite(req, res){
   let group = await Group.findById(req.params.id).populate('invites').populate('users')
+  if (group.owner._id.equals(req.user._id)){
+    // Remove any empty invites
+    req.body.invites = req.body.invites.filter(e=>e.email)
+    
+    if (req.body.invites.length){
 
-  // Remove any empty invites
-  req.body.invites = req.body.invites.filter(e=>e.email)
-  
-  if (req.body.invites.length){
+      // Indexing existing invites by email for easy lookup
+      let invitesByEmail = {}
+      group.invites.forEach(i => invitesByEmail[i.email] = i)
 
-    // Indexing existing invites by email for easy lookup
-    let invitesByEmail = {}
-    group.invites.forEach(i => invitesByEmail[i.email] = i)
+      // Indexing existing group members by email for easy lookup
+      let membersByEmail = {}
+      group.users.forEach(i => membersByEmail[i.email] = i)
 
-    // Indexing existing group members by email for easy lookup
-    let membersByEmail = {}
-    group.users.forEach(i => membersByEmail[i.email] = i)
+      let sendInvitesTo = []
 
-    let sendInvitesTo = []
-
-    for ( let i = 0; i < req.body.invites.length; i++ ){
-      // Check if email is not in existing invites & not in existing members
-      if ( !invitesByEmail[req.body.invites[i].email] && !membersByEmail[req.body.invites[i].email] ){
-        // Add the email to invites
-        group.invites.push(req.body.invites[i])
-        sendInvitesTo.push(req.body.invites[i])
+      for ( let i = 0; i < req.body.invites.length; i++ ){
+        // Check if email is not in existing invites & not in existing members
+        if ( !invitesByEmail[req.body.invites[i].email] && !membersByEmail[req.body.invites[i].email] ){
+          // Add the email to invites
+          group.invites.push(req.body.invites[i])
+          sendInvitesTo.push(req.body.invites[i])
+        }
+        else if (invitesByEmail[req.body.invites[i].email]){
+          // email is already in invites. Let's resend them the invite but not add a new invite.
+          sendInvitesTo.push(req.body.invites[i])
+        }
       }
-      else if (invitesByEmail[req.body.invites[i].email]){
-        // email is already in invites. Let's resend them the invite but not add a new invite.
-        sendInvitesTo.push(req.body.invites[i])
+
+      group = await group.save()
+
+      // Refreshing invitesByEmail with new invites
+      group.invites.forEach(i => invitesByEmail[i.email] = i)
+
+      // Send emails
+      for (let invite of sendInvitesTo){
+        sendMail.invite(group, invitesByEmail[invite.email], req.user, req.body)
       }
-    }
-
-    group = await group.save()
-
-    // Refreshing invitesByEmail with new invites
-    group.invites.forEach(i => invitesByEmail[i.email] = i)
-
-    // Send emails
-    for (let invite of sendInvitesTo){
-      sendMail.invite(group, invitesByEmail[invite.email], req.user, req.body)
     }
   }
   res.redirect('/groups/'+req.params.id)
