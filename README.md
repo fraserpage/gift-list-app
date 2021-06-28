@@ -14,12 +14,14 @@ An app that solves the problem of communicating and coordinating gifts
 ## Technologies Used
 * Express/Node
 * Mongo/Mongoose
+* Running on Heroku and MongoDB Atlas
 * EJS templating
 * Nodemailer with Sendgrid for emails
 * CSS Variables to take full advantage of [Recursive Sans](https://www.recursive.design/), the very cool variable font the site uses.
 
 ## Next Steps
 * Add a favicon!
+* AJAXify form submission - especially adding gifts to a list
 * Update and Delete on list items
 * Allow un-claiming a gift
 * Add opt-in notifications for updates to gift lists
