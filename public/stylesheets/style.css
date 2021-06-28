@@ -199,6 +199,9 @@ form.group-form > div:not(#invites) .input-sizer{
   padding: 0;
 }
 
+.stacked.input-sizer input,
+.stacked.input-sizer textarea,
+.stacked.input-sizer::after,
 form.group-form > div:not(#invites) .input-sizer::after,
 form.group-form > div:not(#invites) .input-sizer input,
 form.group-form > div:not(#invites) .input-sizer textarea {
@@ -337,6 +340,17 @@ a.group:hover h2{
 
 
 /* Gift lists */
+p#list-desc + form#edit-gift-list {
+  display: none;
+}
+form#edit-gift-list textarea {
+  --wght: 400;
+  margin: 0.5rem 0;
+}
+form#edit-gift-list label {
+  margin: 0.5rem 0;
+  padding:0;
+}
 
 .gift-list li:first-of-type{
   border-top: 1px solid #ddd;
@@ -390,6 +404,10 @@ form .gift,
 }
 span.claimed {
   --slnt: -10;
+}
+.gift-list.others li.claimed span.gift-desc,
+.gift-list.others li.claimed:before {
+    color: blue;
 }
 span.gift-desc{
   display: inline-block;
