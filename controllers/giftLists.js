@@ -15,6 +15,12 @@ async function create(req,res){
   }
 }
 
-function update(req,res){
-  res.send('update a gift list ')
+async function update(req,res){
+  const group = await Group.findById(req.params.id)
+  const list = group.giftLists.id(req.params.listId)
+  if (list.user._id.equals(req.user._id)){
+    list.desc = req.body.desc
+    await group.save()
+  }
+  res.redirect('/groups/'+req.params.id)
 }

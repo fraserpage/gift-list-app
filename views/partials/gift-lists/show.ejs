@@ -3,7 +3,10 @@
     <!-- update list form goes inline here? -->
     <div class="gift-list yours">
       <h2>Your list</h2>
-      <p><%= list.desc %> </p>
+      <p id="list-desc">
+        <button class="small" onclick="this.parentNode.remove()">Edit</button>
+<%= list.desc %> </p>
+      <%- include('./edit', {list, group})  %> 
       <ul>
         <% for (let gift of list.gifts){ %> 
           <li>
@@ -22,7 +25,11 @@
       <p><%= list.desc %> </p>
       <ul>
         <% for (let gift of list.gifts){ %> 
-          <li class="<%= gift.claimedBy ? 'claimed' : 'free' %>" onclick="this.getElementsByTagName('button')[0].click()">
+          <li class="<%= 
+          gift.claimedBy ? 
+            gift.claimedBy._id.equals(user._id) ? 'claimed you' 
+              : 'claimed' 
+            : 'free' %>" onclick="this.getElementsByTagName('button')[0].click()">
             <span class="gift-desc">
               <strong><%= gift.name %> </strong> 
               <%= gift.note ? "- "+gift.note : "" %> 

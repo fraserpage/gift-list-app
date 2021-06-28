@@ -1,0 +1,9 @@
+<form id="edit-gift-list" action="/groups/<%= group._id %>/gift-list/<%= list._id %>?_method=PUT" method="post">
+
+  <label for="desc" class="input-sizer stacked" data-value="<%= list.desc || "A note about your list (optional)" %>">
+    <span>Description/Note:</span>
+    <textarea name="desc" id="desc" oninput="this.parentNode.dataset.value = this.value" rows="1" placeholder="A note about your list (optional)"><%= list.desc %></textarea>
+  </label>
+
+  <button class="small" type="submit">Update</button>
+</form>
