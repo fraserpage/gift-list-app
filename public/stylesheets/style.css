@@ -307,11 +307,15 @@ form#new-group{
 }
 
 /* Group index */
-
-a.group{
+#groups-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -3rem;
+}
+#groups-list a.group {
+  margin: 3rem;
   color: black;
   text-decoration: none;
-  margin: 3rem 0;
   padding-bottom: 3rem;
 }
 a.group:hover{
@@ -332,22 +336,37 @@ a.group:hover h2{
 }
 
 /* Gift lists */
+div#gift-lists {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -2rem;
+}
+div#gift-lists .gift-list {
+  margin: 2rem;
+}
+.gift-list.yours {
+  order: 1;
+}
+.gift-list.others {
+  order: 2;
+}
 p#list-desc + form#edit-gift-list {
   display: none;
 }
-#list-desc button{
+#list-desc button:not(.empty-desc){
   float: right;
   margin-top: -0.6em;
 }
+form#new-gift-list textarea,
 form#edit-gift-list textarea {
   --wght: 400;
   margin: 0.5rem 0;
 }
+form#new-gift-list label,
 form#edit-gift-list label {
   margin: 0.5rem 0;
   padding:0;
 }
-
 .gift-list li:first-of-type{
   border-top: 1px solid #ddd;
 }

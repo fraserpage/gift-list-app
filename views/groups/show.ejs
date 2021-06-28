@@ -30,11 +30,12 @@
 <%- include('../partials/groups/delete') %>
 
 
-
-<%# Only show the new gift list form if the user doesn't have one already %> 
-<% if ( ! group.giftLists.some( list => list.user._id.equals(user._id) )){ %> 
-  <%- include('../partials/gift-lists/new') %> 
-<% } %> 
-<%- include('../partials/gift-lists/show', {lists: group.giftLists, user}) %> 
+<div id="gift-lists">
+  <%# Only show the new gift list form if the user doesn't have one already %> 
+  <% if ( ! group.giftLists.some( list => list.user._id.equals(user._id) )){ %> 
+    <%- include('../partials/gift-lists/new') %> 
+  <% } %> 
+  <%- include('../partials/gift-lists/show', {lists: group.giftLists, user}) %> 
+</div>
 
 <%- include('../partials/footer') %> 
