@@ -4,8 +4,8 @@
     <div class="gift-list yours">
       <h2>Your list</h2>
       <p id="list-desc">
-        <button class="small" onclick="this.parentNode.remove()">Edit</button>
-<%= list.desc %> </p>
+        <button class="small <%= !list.desc ? "empty-desc" : "" %>" onclick="this.parentNode.remove()"><%= list.desc ? "Edit" : "Add a note" %></button>
+        <%= list.desc %> </p>
       <%- include('./edit', {list, group})  %> 
       <ul>
         <% for (let gift of list.gifts){ %> 
@@ -45,6 +45,5 @@
         <% } %>   
       </ul> 
     </div>
-  <% } %> 
-
+  <% } %>   
 <% } %> 
