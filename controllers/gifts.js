@@ -2,9 +2,7 @@ const Group = require('../models/group')
 
 module.exports = { 
   create, 
-  update, 
-  claim,
-  delete: deleteGift 
+  claim
 }
 
 async function create(req,res){
@@ -15,10 +13,6 @@ async function create(req,res){
   res.redirect('/groups/'+req.params.id)
 }
 
-function update(req,res){
-  res.send('update gift')
-}
-
 async function claim(req,res){
   const group = await Group.findById(req.params.id)
   const list = group.giftLists.id(req.params.listId)
@@ -26,8 +20,4 @@ async function claim(req,res){
   gift.claimedBy = req.user._id
   await group.save()
   res.redirect('/groups/'+req.params.id)
-}
-
-function deleteGift(req,res){
-  res.send('delete gift')
 }
